@@ -7,12 +7,24 @@ import {
 } from 'react-native';
 import React from 'react';
 
-const SearchComponent = () => {
+const SearchComponent = props => {
+  const {searchFilterFunction, reRenderListWithRandomNumbers} = props;
   return (
     <View style={styles.container}>
-      <TextInput style={styles.input} placeholder="Search a text" />
-      <TouchableOpacity style={styles.submitButton}>
-        <Text style={styles.submitButtonText}>Re-render</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Search a text"
+        selectTextOnFocus={false}
+        selectionColor={'#00000000'}
+        numberOfLines={1}
+        multiline={false}
+        placeholderTextColor={'#000'}
+        onChangeText={text => searchFilterFunction(text)}
+      />
+      <TouchableOpacity
+        style={styles.reRenderButton}
+        onPress={reRenderListWithRandomNumbers}>
+        <Text style={styles.reRenderButtonText}>Re-render</Text>
       </TouchableOpacity>
     </View>
   );
@@ -24,19 +36,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     justifyContent: 'flex-start',
   },
-  text: {
-    fontSize: 24,
-  },
   input: {
     padding: 15,
     marginVertical: 15,
     marginLeft: 15,
     marginRight: 15,
     fontSize: 18,
+    color: '#000',
     borderColor: '#000',
     borderWidth: 1,
   },
-  submitButton: {
+  reRenderButton: {
     backgroundColor: '#808080',
     padding: 5,
     width: 100,
@@ -45,7 +55,7 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     height: 35,
   },
-  submitButtonText: {
+  reRenderButtonText: {
     color: '#000',
   },
 });
