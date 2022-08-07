@@ -18,6 +18,9 @@ const SearchComponent = props => {
         selectionColor={'#00000000'}
         numberOfLines={1}
         multiline={false}
+        textContentType={'none'}
+        autoCapitalize={'none'}
+        autoComplete={false}
         placeholderTextColor={'#000'}
         onChangeText={text => searchFilterFunction(text)}
       />
@@ -37,14 +40,15 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   input: {
-    padding: 15,
+    padding: 5,
     marginVertical: 15,
     marginLeft: 15,
     marginRight: 15,
     fontSize: 18,
-    color: '#000',
+    color: '#000000',
     borderColor: '#000',
     borderWidth: 1,
+    height: 35,
   },
   reRenderButton: {
     backgroundColor: '#808080',
