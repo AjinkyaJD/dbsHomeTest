@@ -5,10 +5,14 @@ import apiCall from '../services/ApiActionCreator';
 import DoggoWalkImageView from './DoggoWalkImageView';
 import StyleDetails from '../common/StyleDetails';
 import {StatusBar} from 'react-native';
+import SearchComponent from './SearchComponent';
+import PostsComponent from './PostsComponent';
 const Home = () => {
   const dispatch = useDispatch();
   const data = useSelector(state => state.apiReducer.data);
   const loading = useSelector(state => state.apiReducer.loading);
+  // const [query, setQuery] = useState('');
+
   useEffect(() => {
     dispatch(apiCall('https://jsonplaceholder.typicode.com/posts'));
   }, []);
@@ -22,15 +26,8 @@ const Home = () => {
           StyleDetails.statusBarSpace,
         ]}>
         <DoggoWalkImageView />
-        {loading ? (
-          <ActivityIndicator size="large" color="red" />
-        ) : (
-          <FlatList
-            data={data}
-            renderItem={({item}) => <Text>{item.title}</Text>}
-            keyExtractor={(item, index) => index.toString()}
-          />
-        )}
+        <SearchComponent />
+        <PostsComponent loading={loading} data={data} />
       </View>
     </View>
   );
