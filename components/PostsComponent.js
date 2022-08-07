@@ -10,8 +10,7 @@ import {
 import React from 'react';
 
 const PostsComponent = props => {
-  const {loading, data} = props;
-
+  const {loading, data, filteredData} = props;
   const renderDetailedText = item => (
     <Text>
       {item.id + ':' + item.body + ' '}
@@ -25,7 +24,7 @@ const PostsComponent = props => {
         <ActivityIndicator size="large" color="red" />
       ) : (
         <FlatList
-          data={data}
+          data={filteredData && filteredData.length > 0 ? filteredData : data}
           renderItem={({item}) => renderDetailedText(item)}
           keyExtractor={(item, index) => index.toString()}
         />
@@ -36,7 +35,7 @@ const PostsComponent = props => {
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 15,
+    marginVertical: 120,
     marginLeft: 15,
     marginRight: 15,
   },
